@@ -1,6 +1,6 @@
 package com.example.security.service.impl;
 
-import com.example.security.service.WebService;
+import com.example.security.service.DateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.joda.time.DateTimeConstants;
@@ -13,7 +13,7 @@ import java.util.List;
 @Log4j2
 @RequiredArgsConstructor
 @Service
-public class WebServiceImpl implements WebService {
+public class DateServiceImpl implements DateService {
 
     @Override
     public List<Integer> getListOfDates(Integer week){

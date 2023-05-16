@@ -26,9 +26,20 @@
       <a class="link" href="/my-profile">
         <ion-icon name="home"></ion-icon>
       </a>
-      <a class="link" href="/logout">
+      <a class="link" href="/logout" onclick="clearLocalStorage()">
         <ion-icon name="log-out-outline"></ion-icon>
       </a>
+      <script>
+        var clearLocalStorage = function (){
+          localStorage.clear();
+        }
+      </script>
+<!--      <form method="post" action="/logout">-->
+<!--        <script>-->
+<!--          localStorage.clear();-->
+<!--        </script>-->
+<!--        <button type="submit"> <ion-icon name="log-out-outline"></ion-icon></button>-->
+<!--      </form>-->
       <p>Hello, <span id="headerName"><script>
         document.getElementById("headerName").innerText = JSON.stringify(userData.firstName).slice(1,-1)</script></span> !</p>
       <!--        <span th:text="${firstName}"></span>-->

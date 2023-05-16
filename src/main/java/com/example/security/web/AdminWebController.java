@@ -34,7 +34,7 @@ public class AdminWebController {
     }
 
     @PostMapping("/admin-change-user")
-    public String shoeUserInfo(Long id){
+    public String showUserInfo(Long id){
         return "redirect:user-info?userId="+id;
     }
 

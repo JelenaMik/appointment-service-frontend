@@ -6,7 +6,7 @@ import com.example.security.model.AppointmentRequest;
 import com.example.security.model.UserData;
 import com.example.security.service.AppointmentService;
 import com.example.security.service.UserDataService;
-import com.example.security.service.WebService;
+import com.example.security.service.DateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.LocalDate;
@@ -22,7 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class AppointmentController {
-    private final WebService webService;
+    private final DateService webService;
     private final AppointmentService appointmentService;
     public final UserDataService userDataService;
 

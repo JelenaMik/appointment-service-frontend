@@ -2,7 +2,7 @@ package com.example.security.service;
 
 import java.util.List;
 
-public interface WebService {
+public interface DateService {
 
     List<Integer> getListOfDates(Integer week);
 

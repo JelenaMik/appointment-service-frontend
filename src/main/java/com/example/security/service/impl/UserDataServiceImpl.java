@@ -1,8 +1,8 @@
 package com.example.security.service.impl;
 
 import com.example.security.exceptions.UserDataNotFoundException;
-import com.example.security.repository.UserDataRepository;
 import com.example.security.model.UserData;
+import com.example.security.repository.UserDataRepository;
 import com.example.security.service.UserDataService;
 import com.example.security.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,22 +20,11 @@ public class UserDataServiceImpl implements UserDataService {
 
     @Override
     public List<UserData> getProviderListIfSearchingStringHasText(String string){
-        List<UserData> list = userDataRepository.searchUserDataByName(string);
-        log.debug("list is {}", list);
-        List<UserData> providerList = list.stream()
-                .filter(userData -> userService.isUserDataProvider(userData.getUserId()))
-                .toList();
-        log.debug("providerList mapped {}", providerList);
-        return providerList;
+        return userDataRepository.getProviderListIfSearchingStringHasText(string);
     }
     @Override
     public List<UserData> getProviderListIfSearchingStringIsEmpty() {
-        log.info("in server method");
-        List<Long> first10Providers = userService.findProvidersBySearching();
-        log.info("First ten users {}", first10Providers);
-        List<UserData> providerData = getProvidersData(first10Providers);
-        log.info("ProviderData list {}", providerData);
-        return providerData;
+        return userDataRepository.getProviderListIfSearchingStringIsEmpty();
     }
 
     @Override

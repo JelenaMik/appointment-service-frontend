@@ -17,27 +17,27 @@ public class AuthenticationController {
 
 //    private final RestTemplate restTemplate;
 
-    private final AuthenticationService service;
-
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
-    ) {
-        return ResponseEntity.ok(service.register(request));
-    }
-    @PostMapping("/authenticate")
-
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
-    ) {
-        return ResponseEntity.ok(service.authenticate(request));
-    }
-
-
-    @GetMapping("/registration")
-    public ResponseEntity<String> showInfo(){
-        return ResponseEntity.ok("You need to register");
-    }
+//    private final AuthenticationService service;
+//
+//    @PostMapping("/register")
+//    public ResponseEntity<AuthenticationResponse> register(
+//            @RequestBody RegisterRequest request
+//    ) {
+//        return ResponseEntity.ok(service.register(request));
+//    }
+//    @PostMapping("/authenticate")
+//
+//    public ResponseEntity<AuthenticationResponse> authenticate(
+//            @RequestBody AuthenticationRequest request
+//    ) {
+//        return ResponseEntity.ok(service.authenticate(request));
+//    }
+//
+//
+//    @GetMapping("/registration")
+//    public ResponseEntity<String> showInfo(){
+//        return ResponseEntity.ok("You need to register");
+//    }
 
 //    @PostMapping("save_user_details/{id}")
 //    public ResponseEntity<UserData> saveUserData(@PathVariable Long id, String firstName, String lastName){

@@ -1,10 +1,10 @@
 package com.example.security.service.impl;
 
 import com.example.security.exceptions.AppointmentNotFoundException;
-import com.example.security.repository.AppointmentRepository;
 import com.example.security.model.AppointmentDetailDto;
 import com.example.security.model.AppointmentDto;
 import com.example.security.model.AppointmentRequest;
+import com.example.security.repository.AppointmentRepository;
 import com.example.security.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

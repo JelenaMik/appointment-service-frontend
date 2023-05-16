@@ -2,7 +2,7 @@ package com.example.security.web;
 
 import com.example.security.auth.AuthenticationRequest;
 import com.example.security.auth.AuthenticationResponse;
-import com.example.security.auth.AuthenticationService;
+//import com.example.security.auth.AuthenticationService;
 import com.example.security.auth.RegisterRequest;
 import com.example.security.repository.model.User;
 import com.example.security.model.UserData;
@@ -30,7 +30,6 @@ import java.util.Objects;
 public class WebController {
 
     private final UserService userService;
-    private final AuthenticationService service;
     private final UserDataService userDataService;
 
     @GetMapping("/my-profile")
@@ -108,21 +107,21 @@ public class WebController {
 
     @GetMapping("/register")
     public String showRegisterPage(@RequestParam(name="status", required = false) String status,Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new RegisterRequest());
         model.addAttribute("status", status);
         return "register";
     }
 
     @PostMapping("/register")
-    public String completeRegistration(User user, Model model){
-        if(Boolean.TRUE.equals(userService.checkIfEmailExists(user.getEmail()))){
+    public String completeRegistration(RegisterRequest registerRequest, Model model){
+        if(Boolean.TRUE.equals(userService.checkIfEmailExists(registerRequest.getEmail()))){
             return "redirect:register?status=email-exists";
         }
-        var request = new RegisterRequest(user.getEmail(), user.getPassword());
-        var response = service.register(request);
+        var request = new RegisterRequest(registerRequest.getEmail(), registerRequest.getPassword());
+        var response = userService.register(request);
         if (response!=null) {
             Long userId = userService.
-                    getUserIdByEmail(user.getEmail());
+                    getUserIdByEmail(registerRequest.getEmail());
             log.info("user with id: {} created", userId);
             return "redirect:complete-registration?userId="+userId;
         }
@@ -147,14 +146,13 @@ public class WebController {
 
     @GetMapping("/change-login-info")
     public String changeCredentials(Model model, String status){
-        User user = new User();
-        model.addAttribute("user", user);
+        model.addAttribute("user", new AuthenticationRequest());
         model.addAttribute("status", status);
         return "change-login-info";
     }
 
     @PostMapping("/update-login-info")
-    public String updateLoginInfo(User user, String oldEmail){
+    public String updateLoginInfo(AuthenticationRequest user, String oldEmail){
         AuthenticationResponse token = userService.changeEmailAndPassword(user, oldEmail);
         log.info(token.getToken());
         //hande new token here
@@ -181,11 +179,16 @@ public class WebController {
     }
 
     @GetMapping("/update-user-profile")
-    @Retry(name="security-service")
+//    @Retry(name="security-service")
     public String setNewLocalStorage(Model model, Long id){
         UserData userData = userDataService.getUserDataByUserId(id);
         model.addAttribute("userData", userData);
         return "update-user-profile";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+        return "redirect:login";
     }
 
 
