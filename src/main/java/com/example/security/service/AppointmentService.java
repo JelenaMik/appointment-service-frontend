@@ -26,4 +26,5 @@ public interface AppointmentService {
 
     void bookAnAppointment(Long clientId, Long appointmentId, String details);
 
+    void authenticateAppointmentService();
 }

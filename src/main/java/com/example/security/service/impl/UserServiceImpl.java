@@ -166,6 +166,7 @@ public class UserServiceImpl implements UserService {
 //        assert response != null;
 //        log.info("Token: {}", response.getToken());
 //        return response.getToken();
+        log.info("in service method");
             return userRepository.getTokenAfterAuthentication(request).getToken();
     }
     @Override

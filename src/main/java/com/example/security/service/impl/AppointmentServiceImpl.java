@@ -60,4 +60,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public  void bookAnAppointment(Long clientId, Long appointmentId, String details){
         appointmentRepository.bookAppointment(clientId, appointmentId, details);
     }
+
+    @Override
+    public void authenticateAppointmentService(){
+        appointmentRepository.authenticate();
+    }
 }

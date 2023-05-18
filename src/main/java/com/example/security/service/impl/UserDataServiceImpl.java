@@ -75,4 +75,9 @@ public class UserDataServiceImpl implements UserDataService {
         log.info("Provider with Id {} was removed from client Id {} favorite providers list", clientId, providerId);
     }
 
+    @Override
+    public void authenticateUserDataMs(){
+        userDataRepository.authenticate();
+    }
+
 }

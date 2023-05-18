@@ -23,4 +23,6 @@ public interface UserDataService {
     List<UserData> getFavoriteProviders(Long clientId);
 
     void deleteFavoriteProvider(Long clientId, Long providerId);
+
+    void authenticateUserDataMs();
 }

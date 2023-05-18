@@ -4,8 +4,11 @@ import com.example.security.auth.AuthenticationRequest;
 import com.example.security.auth.AuthenticationResponse;
 //import com.example.security.auth.AuthenticationService;
 import com.example.security.auth.RegisterRequest;
+import com.example.security.repository.model.Jwt;
 import com.example.security.repository.model.User;
 import com.example.security.model.UserData;
+import com.example.security.service.AppointmentService;
+import com.example.security.service.JwtService;
 import com.example.security.service.UserDataService;
 import com.example.security.service.UserService;
 import io.github.resilience4j.retry.annotation.Retry;
@@ -31,6 +34,8 @@ public class WebController {
 
     private final UserService userService;
     private final UserDataService userDataService;
+    private final AppointmentService appointmentService;
+    private final JwtService jwtService;
 
     @GetMapping("/my-profile")
     public String loginSuccess(@RequestParam(required = false) String string, Model model){
@@ -98,7 +103,11 @@ public class WebController {
     public String authenticate( AuthenticationRequest authenticationRequest ) {
         try{
             log.info("try");
-            userService.getTokenAfterAuthentication(authenticationRequest);
+            String token = userService.getTokenAfterAuthentication(authenticationRequest);
+            log.info("Token {}", token);
+            jwtService.saveToken(token);
+            userDataService.authenticateUserDataMs();
+            appointmentService.authenticateAppointmentService();
             return "redirect:set-localstorage/"+authenticationRequest.getEmail();}
         catch (Exception e){
             return "redirect:login?status=user_not_found";
@@ -188,6 +197,7 @@ public class WebController {
 
     @GetMapping("/logout")
     public String logout(){
+        jwtService.removeToken();
         return "redirect:login";
     }
 
