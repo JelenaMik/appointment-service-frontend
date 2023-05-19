@@ -2,8 +2,6 @@ package com.example.security.model;
 
 import com.example.security.enums.AppointmentType;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -30,7 +28,7 @@ public class AppointmentDto {
     @FutureOrPresent
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime startTime;
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     private AppointmentType appointmentType;
     @Size(max = 50)
     private String details;
